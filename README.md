@@ -28,3 +28,50 @@ The numerical simulation of the Oscillating Heat Pipe (OHP) executes sequentiall
 
 5. **Post-Processing**
    - System state history is continuously sampled into a `SimulationResult` buffer and saved to disk. Later, one or more rendering routines read the output data to animate temperatures and slug phase distributions.
+
+## Web Application
+
+The project includes a web application for an interactive simulation experience.
+
+### Prerequisites
+
+- **Julia**: The backend requires Julia. By default, the project expects the Julia executable to be located at `~/.juliaup/bin/julia`.
+- **Node.js**: The frontend requires Node.js and npm for development.
+
+### Running the Application
+
+To run the full application, you need to start both the backend and the frontend:
+
+1. **Start the Julia Backend**:
+   From the project root, run:
+   ```bash
+   ~/.juliaup/bin/julia --project=web_backend web_backend/server.jl
+   ```
+   The backend will listen on `http://localhost:8080`.
+
+2. **Start the React Frontend**:
+   From the project root, run:
+   ```bash
+   cd web_frontend && npm run dev
+   ```
+   The frontend will be available at `http://localhost:5173`.
+
+## Testing
+
+The project maintains a comprehensive test suite for both the simulation core and the web application.
+
+### Backend Tests (Julia)
+Includes unit tests for simulation core and API integration tests.
+```bash
+cd web_backend && ~/.juliaup/bin/julia --project=. -e 'using Pkg; Pkg.test()'
+```
+
+### Frontend Tests
+- **Unit Tests (Vitest)**: For component logic.
+  ```bash
+  cd web_frontend && npm run test
+  ```
+- **End-to-End Tests (Playwright)**: Verifies the full user flow from browser to backend.
+  ```bash
+  cd web_frontend && npx playwright test
+  ```
