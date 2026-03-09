@@ -29,3 +29,8 @@ src/tmp.gif
 *.csv
 *.xlsx
 /examples
+test_out.txt
+
+# Simulation outputs
+web_backend/src/output/
+
